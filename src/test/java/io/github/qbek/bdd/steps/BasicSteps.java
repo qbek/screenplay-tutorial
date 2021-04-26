@@ -1,4 +1,4 @@
-package io.github.qbek.steps;
+package io.github.qbek.bdd.steps;
 
 import io.cucumber.java.en.*;
 
@@ -60,4 +60,6 @@ public class BasicSteps {
     public void magicMultilineString(String multi) {
         System.out.println(multi);
     }
+
+
 }
