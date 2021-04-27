@@ -3,6 +3,7 @@ package io.github.qbek.asserts;
 import io.github.qbek.questions.BrowserCookie;
 import net.serenitybdd.screenplay.Consequence;
 import net.serenitybdd.screenplay.QuestionConsequence;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 
 public class Should {

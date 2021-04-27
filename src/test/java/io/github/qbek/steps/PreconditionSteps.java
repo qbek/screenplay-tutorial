@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import io.github.qbek.abilities.AuthoriseHimself;
 import io.github.qbek.actions.Navigate;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.SilentTask;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
@@ -29,7 +30,13 @@ public class PreconditionSteps {
 
     @Given("{actor} is on Main page")
     public void userIsOnMainPage(Actor user) {
-        user.wasAbleTo(Navigate.toLoginPage(), Navigate.performUserLogin());
+
+        user.wasAbleTo(
+                SilentTask.where(
+                        Navigate.toLoginPage(),
+                        Navigate.performUserLogin()
+                )
+        );
     }
 
 }
