@@ -1,4 +1,4 @@
-package io.github.qbek.bdd.steps;
+package io.github.qbek.steps;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -25,6 +25,11 @@ public class PreconditionSteps {
     @And("{actor} is on Login page")
     public void heIsOnLoginPage(Actor user) {
         user.wasAbleTo(Navigate.toLoginPage());
+    }
+
+    @Given("{actor} is on Main page")
+    public void userIsOnMainPage(Actor user) {
+        user.wasAbleTo(Navigate.toLoginPage(), Navigate.performUserLogin());
     }
 
 }

@@ -1,4 +1,4 @@
-package io.github.qbek.bdd.steps;
+package io.github.qbek.steps;
 
 import io.cucumber.java.en.*;
 
