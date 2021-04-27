@@ -1,14 +1,12 @@
 package io.github.qbek.tasks;
 
 import io.github.qbek.abilities.AuthoriseHimself;
+import io.github.qbek.actions.Navigate;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.targets.Target;
-import net.serenitybdd.screenplay.waits.Wait;
-import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 
 public class LoginUsingCredentials implements Task {
@@ -28,11 +26,6 @@ public class LoginUsingCredentials implements Task {
                 ),
                 Click.on(loginButton)
         );
-        actor.wasAbleTo(
-                Wait.until(
-                        Visibility.of(By.cssSelector("#loading")).asABoolean(),
-                        Matchers.equalTo(false)
-                ).forNoLongerThan(5).seconds()
-        );
+        actor.wasAbleTo(Navigate.waitForLoaderToClose());
     }
 }

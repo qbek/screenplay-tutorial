@@ -2,10 +2,12 @@ package io.github.qbek.steps;
 
 import io.cucumber.java.ParameterType;
 import io.github.qbek.abilities.AuthoriseHimself;
-import io.github.qbek.data.CredentialsGenerator;
-import io.github.qbek.data.StaticCredentialsGenerator;
+import io.github.qbek.data.*;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParameterDefs {
     @ParameterType(".*")
@@ -18,4 +20,22 @@ public class ParameterDefs {
         CredentialsGenerator account = new StaticCredentialsGenerator();
         return account.getAccount();
     }
+
+    @ParameterType("project")
+    public String projectName (String s) {
+        TestDataGenerator generator = getGenerator();
+        return generator.getProjectName();
+    }
+
+    private TestDataGenerator getGenerator() {
+        List<TestDataGenerator> generators = new ArrayList<>();
+        generators.add(new RandomTestDataGenerator());
+        generators.add(new StaticTestDataGenerator());
+        String type = System.getProperty("testData", "static");
+        for (TestDataGenerator g : generators) {
+            if (g.isTypeOf(type)) {return g;}
+        }
+        return new StaticTestDataGenerator();
+    }
+
 }
