@@ -26,7 +26,6 @@ public class CreateNewProject implements Task {
         Target PROJECT_NAME_INPUT = Target.the("Project name input field").locatedBy("#edit_project_modal_field_name");
         Target ADD_BUTTON = Target.the("Project name input field").locatedBy("[type=\"submit\"]");
         actor.remember(PROJECT_NAME, projectName);
-
         actor.attemptsTo(
                 MoveMouse.to(NEW_PROJECT),
                 Click.on(NEW_PROJECT),

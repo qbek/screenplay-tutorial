@@ -15,7 +15,7 @@ public class ParameterDefs {
         return OnStage.theActorCalled(name);
     }
 
-    @ParameterType("account")
+    @ParameterType("account|token")
     public AuthoriseHimself userAccount (String a) {
         CredentialsGenerator account = new StaticCredentialsGenerator();
         return account.getAccount();
@@ -31,7 +31,7 @@ public class ParameterDefs {
         List<TestDataGenerator> generators = new ArrayList<>();
         generators.add(new RandomTestDataGenerator());
         generators.add(new StaticTestDataGenerator());
-        String type = System.getProperty("testData", "static");
+        String type = System.getProperty("testData", "random");
         for (TestDataGenerator g : generators) {
             if (g.isTypeOf(type)) {return g;}
         }

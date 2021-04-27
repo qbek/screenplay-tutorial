@@ -5,19 +5,26 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.github.qbek.abilities.AuthoriseHimself;
 import io.github.qbek.actions.Navigate;
+import net.serenitybdd.screenplay.Ability;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
+import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 
 public class PreconditionSteps {
 
     @Before
     public void setup() {
-        OnStage.setTheStage(new OnlineCast());
+        Ability[] abilities = new Ability[]
+                {
+                        CallAnApi.at("https://api.todoist.com/rest/v1")
+                };
+
+        OnStage.setTheStage(new OnlineCast(abilities));
     }
 
 
-    @Given("{actor} has an {userAccount}")
+    @Given("{actor} has a(n) {userAccount}")
     public void userHasAnAccount(Actor user, AuthoriseHimself authorise) {
         user.can(authorise);
     }
@@ -31,5 +38,4 @@ public class PreconditionSteps {
     public void userIsOnMainPage(Actor user) {
         user.wasAbleTo( Navigate.toMainPage() );
     }
-
 }

@@ -2,11 +2,15 @@ package io.github.qbek.steps;
 
 import io.cucumber.java.en.Then;
 import io.github.qbek.data.Session;
+import io.github.qbek.restapi.ProjectResponse;
+import io.restassured.response.Response;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.QuestionConsequence;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.questions.Text;
+import net.serenitybdd.screenplay.rest.questions.LastResponse;
+import net.serenitybdd.screenplay.rest.questions.TheResponse;
 import net.serenitybdd.screenplay.targets.Target;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -26,12 +30,26 @@ public class VerificationSteps {
 
     @Then("the project is created")
     public void theProjectIsCreated() {
-            Target projectHeader = Target.the("project view header").located(By.cssSelector(".project_view h1"));
+        Target projectHeader = Target.the("project view header").located(By.cssSelector(".project_view h1"));
         Actor user = OnStage.theActorInTheSpotlight();
         user.should(
                 new QuestionConsequence<>("project name",
                         Text.of(projectHeader).asAString(),
                         Matchers.equalTo(user.recall(PROJECT_NAME)))
         );
+    }
+
+
+    @Then("project is created by rest")
+    public void projectIsCreatedByRest() {
+        Actor user = OnStage.theActorInTheSpotlight();
+        Response resp = user.asksFor(LastResponse.received()) ;
+        ProjectResponse project = resp.then().extract().body().as(ProjectResponse.class);
+        user.should(
+                new QuestionConsequence<>("status code", TheResponse.statusCode(), Matchers.equalTo(201)),
+                new QuestionConsequence<>("project name is correct", a -> project.getName(), Matchers.equalTo(user.recall(PROJECT_NAME)))
+        );
+
+
     }
 }

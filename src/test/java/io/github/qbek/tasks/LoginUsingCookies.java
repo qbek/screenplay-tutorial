@@ -1,7 +1,7 @@
 package io.github.qbek.tasks;
 
-import io.github.qbek.actions.Navigate;
 import io.github.qbek.data.Session;
+import io.github.qbek.pageobjects.LoaderObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -20,6 +20,6 @@ public class LoginUsingCookies implements Task {
             browser.manage().addCookie(c);
         }
         browser.navigate().to("https://todoist.com/app");
-        actor.wasAbleTo(Navigate.waitForLoaderToClose());
+        actor.wasAbleTo(LoaderObject.waitForLoaderToClose());
     }
 }
