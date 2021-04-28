@@ -8,6 +8,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.facts.Fact;
 
 import static io.github.qbek.data.Notes.PROJECT;
@@ -45,8 +46,12 @@ public class HasProjectCreated implements Fact {
                 .then().extract().body().as(ProjectResponse.class);
         actor.remember(PROJECT, prj);
 
-        Serenity.recordReportData().withTitle("Created project").andContents(
-                String.format("Project name: %s \n project id: %d", prj.getName(), prj.getId())
+        actor.wasAbleTo(
+                Task.where("Created project details",
+                        a -> Serenity.recordReportData().withTitle("Created project").andContents(
+                                String.format("Project name: %s \n project id: %d", prj.getName(), prj.getId()))
+
+                        )
         );
     }
 }
