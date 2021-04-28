@@ -50,7 +50,6 @@ public class HasProjectCreated implements Fact {
                 Task.where("Created project details",
                         a -> Serenity.recordReportData().withTitle("Created project").andContents(
                                 String.format("Project name: %s \n project id: %d", prj.getName(), prj.getId()))
-
                         )
         );
     }

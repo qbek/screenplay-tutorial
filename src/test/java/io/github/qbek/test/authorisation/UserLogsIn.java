@@ -1,11 +1,13 @@
-package io.github.qbek.test;
+package io.github.qbek.test.authorisation;
 
 import io.github.qbek.actions.Navigate;
 import io.github.qbek.asserts.Should;
 import io.github.qbek.pageobjects.LoginFormObject;
+import io.github.qbek.test.RequestSample;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.thucydides.core.annotations.Feature;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 @RunWith(SerenityRunner.class)
+@Feature
 public class UserLogsIn {
 
     @Managed

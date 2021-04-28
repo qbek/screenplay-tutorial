@@ -42,4 +42,47 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>test</id>
+            <properties>
+                <tests>io/github/qbek/test/**</tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>bdd</id>
+            <properties>
+                <tests>io/github/qbek/CucumberTest.java</tests>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.version}</version>
+                <executions>
+                    <execution>
+                        <id>serenity-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>${tests}</includes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
 </project>

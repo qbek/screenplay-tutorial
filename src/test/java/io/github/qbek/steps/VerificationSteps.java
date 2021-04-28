@@ -1,6 +1,7 @@
 package io.github.qbek.steps;
 
 import io.cucumber.java.en.Then;
+import io.github.qbek.asserts.Should;
 import io.github.qbek.data.Session;
 import io.github.qbek.pageobjects.ProjectViewObject;
 import io.github.qbek.restapi.ProjectResponse;
@@ -17,7 +18,6 @@ import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static io.github.qbek.asserts.Should.haveACookie;
 import static io.github.qbek.data.Notes.PROJECT_NAME;
 import static io.github.qbek.data.Notes.TASK_NAME;
 
@@ -25,7 +25,7 @@ public class VerificationSteps {
 
     @Then("{actor} is logged in")
     public void heIsLoggedIn(Actor user) {
-        user.should(haveACookie());
+        user.should(Should.haveACookie());
         WebDriver browser = user.usingAbilityTo(BrowseTheWeb.class).getDriver();
         Session.COOKIES = browser.manage().getCookies();
     }

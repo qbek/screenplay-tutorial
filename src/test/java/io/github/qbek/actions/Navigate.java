@@ -16,7 +16,7 @@ public class Navigate {
     }
 
     public static Task toLoginPage() {
-        return Task.where("{0} navigates to login page",
+        return Task.where("{0} navigates to **login page**",
                 Open.url("https://todoist.com"),
                 WelcomePageObject.gotoLoginPage()
         );
