@@ -5,4 +5,6 @@ public interface TestDataGenerator {
     public String getProjectName();
 
     public boolean isTypeOf(String type);
+
+    String getTaskName();
 }

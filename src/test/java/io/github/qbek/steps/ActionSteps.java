@@ -2,6 +2,7 @@ package io.github.qbek.steps;
 
 import io.cucumber.java.en.When;
 import io.github.qbek.abilities.AuthoriseHimself;
+import io.github.qbek.actions.Project;
 import io.github.qbek.data.Notes;
 import io.github.qbek.restapi.ProjectRequest;
 import io.restassured.http.ContentType;
@@ -36,6 +37,14 @@ public class ActionSteps {
                     req.body(payload);
                     return req;
                 })
+        );
+    }
+
+    @When("{actor} creates new {taskName} in the project")
+    public void heCreatesNewTaskInTheProject(Actor user, String taskName) {
+        user.attemptsTo(
+                Project.selectProject(),
+                Project.addTaskToProject(taskName)
         );
     }
 }

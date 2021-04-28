@@ -10,4 +10,9 @@ public class StaticTestDataGenerator implements TestDataGenerator {
     public boolean isTypeOf(String type) {
         return type.equals("static");
     }
+
+    @Override
+    public String getTaskName() {
+        return "static task name";
+    }
 }

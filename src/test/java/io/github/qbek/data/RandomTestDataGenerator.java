@@ -12,7 +12,14 @@ public class RandomTestDataGenerator implements TestDataGenerator {
     }
 
     @Override
+    public String getTaskName() {
+        return generator.backToTheFuture().quote();
+    }
+
+    @Override
     public boolean isTypeOf(String type) {
         return type.equals("random");
     }
+
+
 }

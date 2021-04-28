@@ -27,6 +27,12 @@ public class ParameterDefs {
         return generator.getProjectName();
     }
 
+    @ParameterType("task")
+    public String taskName(String s) {
+        TestDataGenerator generator = getGenerator();
+        return generator.getTaskName();
+    }
+
     private TestDataGenerator getGenerator() {
         List<TestDataGenerator> generators = new ArrayList<>();
         generators.add(new RandomTestDataGenerator());

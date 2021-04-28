@@ -2,6 +2,7 @@ package io.github.qbek.steps;
 
 import io.cucumber.java.en.Then;
 import io.github.qbek.data.Session;
+import io.github.qbek.pageobjects.ProjectViewObject;
 import io.github.qbek.restapi.ProjectResponse;
 import io.restassured.response.Response;
 import net.serenitybdd.screenplay.Actor;
@@ -18,6 +19,7 @@ import org.openqa.selenium.WebDriver;
 
 import static io.github.qbek.asserts.Should.haveACookie;
 import static io.github.qbek.data.Notes.PROJECT_NAME;
+import static io.github.qbek.data.Notes.TASK_NAME;
 
 public class VerificationSteps {
 
@@ -46,10 +48,19 @@ public class VerificationSteps {
         Response resp = user.asksFor(LastResponse.received()) ;
         ProjectResponse project = resp.then().extract().body().as(ProjectResponse.class);
         user.should(
-                new QuestionConsequence<>("status code", TheResponse.statusCode(), Matchers.equalTo(201)),
-                new QuestionConsequence<>("project name is correct", a -> project.getName(), Matchers.equalTo(user.recall(PROJECT_NAME)))
+            new QuestionConsequence<>("status code", TheResponse.statusCode(), Matchers.equalTo(201)),
+            new QuestionConsequence<>("project name is correct", a -> project.getName(), Matchers.equalTo(user.recall(PROJECT_NAME)))
         );
 
+    }
+
+    @Then("the task is correctly created")
+    public void theTaskIsCorrectlyCreated() {
+        Actor user = OnStage.theActorInTheSpotlight();
+        user.should(
+                new QuestionConsequence("task is on the list",
+                        ProjectViewObject.isTaskOnList(user.recall(TASK_NAME)),
+                        Matchers.equalTo(true)));
 
     }
 }

@@ -13,3 +13,11 @@ Feature: User logs in
     Given User is on Main page
     When he creates a new project
     Then the project is created
+
+
+  Scenario: User can add task to the project
+
+    Given User has the project created
+    And User is on Main page
+    When he creates new task in the project
+    Then the task is correctly created
